@@ -1,0 +1,128 @@
+aid: bmll-technologies
+url: https://raw.githubusercontent.com/api-evangelist/bmll-technologies/refs/heads/main/apis.yml
+name: BMLL Technologies
+kind: company
+description: BMLL is a London-based provider of harmonised historical Level 3, 2,
+  and 1 order book data and analytics for capital markets, covering global equities,
+  ETFs, futures, and options. Acquired by Nordic Capital in October 2025 (with Optiver
+  as minority shareholder), BMLL sells its data through the BMLL Data Lab hosted Python
+  environment, the BMLL Data Feed file product, and entitlement-gated REST APIs
+  (Reference Data, Time-Series, Market Data, and an async query APIv2) documented
+  publicly via the bmll Python SDK on PyPI, with delivery over API, S3, SFTP, and
+  Snowflake. There is no self-serve signup - access is sales-led with key-pair
+  credentials issued per account.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Market Data
+- Order Book
+- Stocks
+- Trading
+- Reference Data
+- Historical Data
+- Analytics
+- ETF
+- Futures
+- Options
+created: '2026-07-21'
+modified: '2026-07-21'
+specificationVersion: '0.19'
+apis:
+- aid: bmll-technologies:bmll-reference-data-api
+  name: BMLL Reference Data API
+  tags:
+  - Reference Data
+  - Instruments
+  - Markets
+  - Listings
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://pypi.org/project/bmll/
+  baseURL: https://reference.data.bmlltech.com
+  properties:
+  - url: https://pypi.org/project/bmll/
+    type: Documentation
+  - url: https://data.bmlltech.com
+    type: Portal
+  description: Query reference data for the instruments, listings, and markets in
+    the BMLL universe (equities, ETFs, futures, options), including availability by
+    data type (LOB, listing/instrument/market-level metrics, DataFeed) and ETF
+    constituent data. Documented publicly through the bmll Python SDK
+    (ReferenceDataClient); the host is live but requires entitled key-pair
+    credentials (probed 403 without auth).
+- aid: bmll-technologies:bmll-time-series-api
+  name: BMLL Time-Series API
+  tags:
+  - Time Series
+  - Analytics
+  - Order Book
+  - Metrics
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://pypi.org/project/bmll/
+  baseURL: https://time-series.data.bmlltech.com
+  properties:
+  - url: https://pypi.org/project/bmll/
+    type: Documentation
+  - url: https://data.bmlltech.com
+    type: Portal
+  description: Daily time-series metrics and analytics derived from BMLL's
+    harmonised Level 3 order book history, including classified trades, queried by
+    instrument, listing, or market. Documented publicly through the bmll Python SDK
+    (TimeSeriesClient); the host is live but requires entitled key-pair credentials
+    (probed 403 without auth).
+- aid: bmll-technologies:bmll-market-data-api
+  name: BMLL Market Data API
+  tags:
+  - Market Data
+  - Market State
+  - CBBO
+  - Quotes
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://pypi.org/project/bmll/
+  baseURL: https://market-data.data.bmlltech.com
+  properties:
+  - url: https://pypi.org/project/bmll/
+    type: Documentation
+  - url: https://data.bmlltech.com
+    type: Portal
+  description: Retrieve per-instrument market state and consolidated best bid and
+    offer (CBBO) for listings on a given day, with an async poll-for-result request
+    pattern. Documented publicly through the bmll Python SDK (MarketDataClient);
+    the host is live but requires entitled key-pair credentials (probed 403 without
+    auth).
+- aid: bmll-technologies:bmll-api-v2
+  name: BMLL APIv2 Query API
+  tags:
+  - Datasets
+  - Query
+  - Async
+  - Historical Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://pypi.org/project/bmll/
+  baseURL: https://api.data.bmlltech.com
+  properties:
+  - url: https://pypi.org/project/bmll/
+    type: Documentation
+  - url: https://data.bmlltech.com
+    type: Portal
+  description: Asynchronous dataset query API (initiate query, poll, download
+    results as JSONL/Arrow into pandas or polars) over BMLL datasets, including a
+    timeseries query endpoint. An OpenAPI definition exists at
+    https://api.data.bmlltech.com/openapi.json but it returned HTTP 401
+    Unauthorized when probed, so it could not be harvested. Documented publicly
+    through the bmll Python SDK (ApiV2Client).
+common:
+- type: Website
+  url: https://bmlltech.com/
+- type: Portal
+  url: https://data.bmlltech.com
+- type: Documentation
+  url: https://www.bmlltech.com/products/bmll-data-feed/documentation
+- type: GitHubOrganization
+  url: https://github.com/bmlltech
+- type: LinkedIn
+  url: https://www.linkedin.com/company/bmll
+- type: Blog
+  url: https://www.bmlltech.com/knowledge-hub
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

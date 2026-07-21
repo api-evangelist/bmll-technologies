@@ -1,0 +1,118 @@
+aid: bmll-technologies
+name: BMLL Technologies
+review:
+  question: Does BMLL Technologies expose a publicly documented, self-serve API surface?
+  answer: false
+  date: '2026-07-21'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    BMLL is an institutional historical market data vendor (Level 3/2/1 order
+    book data and analytics for equities, ETFs, futures, and options) whose API
+    surface is real and live but entitlement-gated. There is no public
+    developer-docs site: the developer portal at https://data.bmlltech.com
+    ("BMLL Data Dashboard") is a login-gated JavaScript SPA, and the corporate
+    site bmlltech.com sits behind bot protection (HTTP 403 to non-browser
+    clients). The API surface is faithfully documented in public through the
+    bmll Python SDK on PyPI (v1.24.7 at review time), whose source maps four
+    data-plane services - Reference Data, Time-Series, Market Data, and an
+    async APIv2 query API - plus auth, account, and Data Lab compute services.
+    Authentication is key-pair based: BMLL_USERNAME plus a PEM private key
+    (passphrase-protected) used to sign JWTs, with per-account entitlements -
+    not self-serve API keys. An OpenAPI document exists at
+    https://api.data.bmlltech.com/openapi.json but returns 401 Unauthorized,
+    so no spec could be harvested. Commercially the offer is sales-led (no
+    public pricing, no signup); ownership moved to Nordic Capital in October
+    2025 with Optiver as minority shareholder. Delivery channels beyond the
+    REST APIs are files via S3 and SFTP and shares via Snowflake (per BMLL's
+    own product pages), with the BMLL Data Lab hosted Jupyter/Python
+    environment as the primary interactive surface.
+  posture: sales-gated
+  selfServeSignup: false
+  publicPricing: false
+  authentication: Username + PEM private key (JWT signing) with per-account entitlements; env vars BMLL_USERNAME / BMLL_KEY_PATH / BMLL_KEY_PASSPHRASE in the official SDK.
+  ownership: Acquired by Nordic Capital (October 2025); Optiver minority shareholder. Prior investors include Nasdaq Ventures, FactSet, Snowflake Ventures, IQ Capital, CTC Venture Capital.
+  deliveryChannels:
+    - REST (entitled, via bmll Python SDK)
+    - S3 flat files
+    - SFTP
+    - Snowflake
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://reference.data.bmlltech.com
+      documented: true
+      probedStatus: 403
+      note: Reference Data API host from bmll SDK SERVICE_URLS; live, auth required.
+    - protocol: REST
+      scheme: https
+      baseURL: https://time-series.data.bmlltech.com
+      documented: true
+      probedStatus: 403
+      note: Time-Series API host from bmll SDK SERVICE_URLS; live, auth required.
+    - protocol: REST
+      scheme: https
+      baseURL: https://market-data.data.bmlltech.com
+      documented: true
+      probedStatus: 403
+      note: Market Data API host from bmll SDK SERVICE_URLS; live, auth required.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.data.bmlltech.com
+      documented: true
+      probedStatus: 401
+      note: APIv2 async query API; /openapi.json referenced in SDK source returns 401 Unauthorized.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket or streaming feed surface is documented anywhere public; BMLL is a historical (T+1) data vendor, not a real-time feed.
+  probes:
+    - url: https://bmlltech.com
+      status: 403
+      note: Cloudflare-style bot protection; site is real and indexed by search engines.
+    - url: https://data.bmlltech.com
+      status: 200
+      note: Login-gated SPA titled "BMLL Data Dashboard"; all /docs, /api, /sdk-docs routes serve the same shell.
+    - url: https://api.data.bmlltech.com/openapi.json
+      status: 401
+      note: OpenAPI exists but is entitlement-gated; body {'message':"Unauthorized"}. Not harvested - no spec fabricated.
+    - url: https://reference.data.bmlltech.com
+      status: 403
+    - url: https://time-series.data.bmlltech.com
+      status: 403
+    - url: https://market-data.data.bmlltech.com
+      status: 403
+    - url: https://account.data.bmlltech.com
+      status: 403
+    - url: https://api.bmlltech.com/v2/market-data
+      status: 404
+      note: Market Data v2 gateway path from SDK; bare GET 404s (no unauthenticated index).
+  openapiHarvested: false
+sources:
+  - url: https://pypi.org/project/bmll/
+    type: SDK
+    note: Official BMLL Python SDK (v1.24.7); its source is the public documentation of the service map, base URLs, auth model, and clients (ReferenceDataClient, TimeSeriesClient, MarketDataClient, ApiV2Client).
+  - url: https://data.bmlltech.com
+    type: Portal
+    note: BMLL Data Dashboard - login-gated developer portal.
+  - url: https://www.bmlltech.com/products/bmll-data-feed/documentation
+    type: Documentation
+    note: Public Data Feed documentation page (bot-blocked to curl; verified via search index).
+  - url: https://www.bmlltech.com/products/bmll-data-lab
+    type: Documentation
+    note: BMLL Data Lab hosted Python/Jupyter environment product page.
+  - url: https://github.com/bmlltech
+    type: GitHubOrganization
+    note: Verified via GitHub API - org "BMLL Technologies", 1 public repo (bmll-notebooks); also github.com/bmll-public (bmll-data-lab-examples). No public OpenAPI specs in either.
+  - url: https://www.bmlltech.com/news/our-news/bmll-secures-investment-from-snowflake-ventures
+    type: News
+    note: Investor history; Snowflake delivery channel.
+actions:
+  openapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    Four real API products were catalogued from the public SDK with live-host
+    probes recorded. No OpenAPI was harvested because the only known spec URL
+    is 401-gated; nothing was fabricated. This is an honest sales-gated
+    institutional posture entry: real APIs, publicly documented only via the
+    PyPI SDK, access by entitlement.
