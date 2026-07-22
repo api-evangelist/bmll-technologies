@@ -1,0 +1,37 @@
+generated: '2026-07-22'
+method: searched
+source: live probes of /.well-known/ on apis.yml + SDK service hosts
+summary: |
+  No real well-known discovery documents were found on any BMLL host.
+  data.bmlltech.com returns HTTP 200 for every path but the body is the
+  login-gated "BMLL Data Dashboard" SPA HTML shell, not the requested
+  document (verified by fetching bodies). The API data-plane hosts return
+  401 for everything unauthenticated; bmlltech.com apex 301s to
+  www.bmlltech.com, which serves 403 bot protection to non-browser clients.
+hosts:
+- host: https://data.bmlltech.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, note: SPA HTML shell, not a security.txt}
+  - {path: /.well-known/openid-configuration, status: 200, note: SPA HTML shell, not OIDC discovery}
+  - {path: /.well-known/oauth-authorization-server, status: 200, note: SPA HTML shell}
+  - {path: /.well-known/api-catalog, status: 200, note: SPA HTML shell}
+  - {path: /.well-known/ai-plugin.json, status: 200, note: SPA HTML shell}
+  - {path: /llms.txt, status: 200, note: SPA HTML shell}
+- host: https://api.data.bmlltech.com
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/ai-plugin.json, status: 401}
+- host: https://reference.data.bmlltech.com
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+- host: https://www.bmlltech.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403, note: site-wide bot protection}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /security.txt, status: 403}
+found: []

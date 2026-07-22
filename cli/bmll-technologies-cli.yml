@@ -1,0 +1,23 @@
+generated: '2026-07-22'
+method: searched
+source: bmll Python SDK 1.24.7 (console_scripts entry point bmll = bmll._cli:main)
+name: bmll
+description: BMLL Command Line Interface — installed with the official Python
+  SDK. A minimal auth utility rather than a full resource CLI; its one command
+  performs the key-pair login handshake and prints the authenticated headers
+  (Bearer token) for use by other tooling.
+install:
+- method: pip
+  command: pip install bmll
+commands:
+- command: bmll login
+  description: Login to the service and return the authenticated headers as JSON.
+  flags:
+  - {flag: -u/--username, description: api username (email)}
+  - {flag: -k/--key-path, description: api private key path}
+  - {flag: -p/--passphrase, description: passphrase for the key if it exists}
+  - {flag: -v/--verbose, description: enable logging to stdout}
+notes: |
+  The command surface is intentionally small — data access flows through the
+  Python client classes (ReferenceDataClient, TimeSeriesClient,
+  MarketDataClient, ApiV2Client), catalogued in packages/.

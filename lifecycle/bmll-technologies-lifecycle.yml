@@ -1,0 +1,34 @@
+generated: '2026-07-22'
+method: derived
+source: bmll Python SDK 1.24.7 source (SERVICE_URLS) + live probes
+versioning:
+  scheme: service-generation
+  detail: |
+    The data-plane is versioned by service generation rather than a single
+    version header: v1-era services live on per-service subdomains
+    (reference/time-series/market-data/account.data.bmlltech.com), the async
+    query API is a second generation ("APIv2") on api.data.bmlltech.com, and
+    a Market Data v2 service is exposed under a URI path
+    (https://api.bmlltech.com/v2/market-data). The SDK sends its own version
+    as an x-bmll-version header on every request.
+  sdk_versioning: semver (bmll on PyPI, current 1.24.7 — see changelog/)
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or RFC 8594 Sunset-header support is
+    documented; docs are login-gated.
+sla:
+  url: null
+  note: No public SLA. Support runs through https://support.bmlltech.com/ with
+    client-facing data scientists (sales-led, institutional accounts).
+status_page: null
+status_page_probe:
+  url: https://status.bmlltech.com
+  result: no-dns
+  note: No public status page found (subdomain does not resolve; none linked
+    from public pages in the search index).
+deprecated_operations: []
+notes: |
+  No OpenAPI could be harvested (401-gated) so deprecated operations cannot be
+  derived. Nothing here asserts a StatusPage or Deprecation pointer — neither
+  exists publicly.

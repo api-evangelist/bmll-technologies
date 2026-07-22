@@ -1,0 +1,27 @@
+generated: '2026-07-22'
+method: searched
+source: https://pypi.org/pypi/bmll/json
+packages:
+- language: python
+  registry: pypi
+  name: bmll
+  url: https://pypi.org/project/bmll/
+  install: pip install bmll
+  official: true
+  version: 1.24.7
+  author: info@bmlltech.com
+  requires_python: '>=3.8'
+  releases: 37
+  first_party_evidence: author/maintainer email is info@bmlltech.com and homepage
+    is https://bmlltech.com; the SDK is the public documentation of the BMLL API
+    surface (ReferenceDataClient, TimeSeriesClient, MarketDataClient, ApiV2Client).
+  notes: Ships a console-script entry point `bmll` (see cli/). A companion `bmll2`
+    package is referenced in the SDK source for Data Lab (in-lab) authentication
+    but is not published on public PyPI (404).
+notes: |
+  Searched npm, PyPI, Maven Central hints, and the GitHub orgs. The only public
+  first-party client library is the `bmll` Python SDK on PyPI. No npm, Maven,
+  NuGet, RubyGems, Packagist, crates.io, or Go module packages were found.
+  GitHub repos github.com/bmlltech/bmll-notebooks and
+  github.com/bmll-public/bmll-data-lab-examples are example notebooks, not
+  client libraries.

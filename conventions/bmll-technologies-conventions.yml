@@ -1,0 +1,45 @@
+generated: '2026-07-22'
+method: derived
+source: bmll Python SDK 1.24.7 source (bmll/_rest.py, bmll/data.py, bmll/exceptions.py)
+authentication:
+  style: key-pair signed-JWT handshake -> Bearer token (+ x-api-key for Data Lab)
+  see: authentication/bmll-technologies-authentication.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header or replay-safety contract is documented
+    anywhere public. Most data-plane calls are reads/queries.
+pagination:
+  style: none-documented
+  note: Query surfaces are request/response or async job based rather than
+    cursor/offset paginated; the APIv2 query API returns complete result sets
+    as downloadable JSONL/Arrow files.
+async_pattern:
+  style: initiate-poll-download
+  description: APIv2 dataset queries POST /query (or /data/{dataset}) to
+    initiate, GET /query?id={query_id} to poll, then download results as
+    JSONL or Arrow into pandas/polars. The Market Data API uses the same
+    poll-for-result pattern per instrument/date.
+request_limits:
+  max_body_bytes: 512000
+  behavior: A 403 response to a request whose content-length is >= 512000
+    raises RequestTooLarge ("The size of your query is too large.").
+rate_limiting:
+  signal: HTTP 429
+  quota: A 429 whose JSON message is "Limit Exceeded" means the per-account
+    service quota is exhausted (QuotaReachedError); usage is inspected at
+    https://data.bmlltech.com/#app/permissions. Other 429s are retried.
+retries:
+  strategy: exponential backoff (base 2, factor 1, capped at 30s; max total 30s)
+  retried_statuses: [429, 502, 503, 504]
+  auth_retry: one re-login on 401, then AuthenticationError
+tracing:
+  request_id: none documented
+  version_header: x-bmll-version sent on every request (SDK version)
+content:
+  request: application/json (numpy/datetime values JSON-encoded by the SDK)
+  response: application/json, or application/gzip (transparently decompressed)
+error_envelope:
+  shape: 'JSON object with a "message" field, e.g. {"message": "Unauthorized"}'
+  see: errors/bmll-technologies-problem-types.yml
+versioning:
+  see: lifecycle/bmll-technologies-lifecycle.yml

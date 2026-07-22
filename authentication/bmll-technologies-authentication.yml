@@ -1,0 +1,54 @@
+generated: '2026-07-22'
+method: searched
+source: bmll Python SDK 1.24.7 source (bmll/_rest.py), https://pypi.org/project/bmll/
+docs: https://pypi.org/project/bmll/
+summary:
+  types: [key-pair-jwt, bearer, apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  self_serve: false
+  note: No OAuth2/OIDC. Access is sales-led with per-account entitlements; no
+    public signup or self-serve API keys.
+model: |
+  Authentication is key-pair based. A user registers at
+  https://data.bmlltech.com (sales-provisioned) and generates an SSH-style
+  key-pair. The SDK signs a JWT with the PEM private key and exchanges it in a
+  two-step handshake with the auth service, then sends the resulting token as
+  a Bearer header on every data-plane request (plus an x-api-key header for
+  Data Lab flows).
+schemes:
+- name: key-pair-jwt
+  type: custom
+  description: Two-step handshake against the auth service. Step 1 POST
+    /auth/identity with {iss = username} returns a session id (sid). Step 2
+    sends signed-JWT claims {iss = username, aud, exp (24h), sid} — signed with
+    the user's PEM private key (optionally passphrase-protected) — to obtain a
+    bearer token. Audience is "dd-services" for the data-plane auth service and
+    "lab-services" for the Data Lab lab-auth service.
+  credentials:
+    username: BMLL_USERNAME env var (api username / email; may also be read from
+      the public key comment field)
+    private_key: BMLL_KEY_PATH env var (path to PEM private key; public key must
+      sit next to it as .pub)
+    passphrase: BMLL_KEY_PASSPHRASE env var (optional)
+  endpoints:
+    auth: https://auth.data.bmlltech.com
+    lab_auth: https://auth.lab.bmlltech.com
+- name: bearer
+  type: http
+  scheme: bearer
+  description: 'The token obtained from the handshake is sent as an
+    "Authorization: Bearer <token>" header on all service requests.'
+- name: x-api-key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Data Lab (lab-auth) logins additionally fetch an API key from the
+    account service (GET /api-key) and send it as the x-api-key header.
+headers:
+  version: x-bmll-version (SDK version) is sent on every request.
+behavior:
+  reauth_on_401: The SDK re-logins once on a 401 and retries; a second
+    consecutive 401 raises AuthenticationError.
+  entitlements: Per-account entitlements gate which datasets/services a token
+    can access; quota is inspected at https://data.bmlltech.com/#app/permissions.

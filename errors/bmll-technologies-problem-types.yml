@@ -1,0 +1,53 @@
+generated: '2026-07-22'
+method: derived
+source: bmll Python SDK 1.24.7 source (bmll/_rest.py Session._needs_retry, bmll/exceptions.py)
+format: message-envelope
+envelope: 'JSON object with a "message" field, e.g. {"message": "Unauthorized"}'
+problems:
+- status: 401
+  title: Unauthorized
+  detail: Token missing/expired or account not entitled. The SDK re-logins once
+    and retries; a second consecutive 401 raises AuthenticationError
+    ("Unauthorised to access service.").
+  sdk_exception: bmll.exceptions.AuthenticationError
+- status: 403
+  title: Request too large
+  detail: A 403 returned when the request content-length is >= 512000 bytes
+    means the query body exceeds the service maximum; reduce the size of the
+    query.
+  sdk_exception: bmll.exceptions.RequestTooLarge
+- status: 403
+  title: Forbidden
+  detail: Unauthenticated requests to the data-plane hosts (reference,
+    time-series, market-data, account) return 403; access requires entitled
+    key-pair credentials.
+- status: 429
+  title: Quota reached
+  detail: A 429 whose JSON message is "Limit Exceeded" means the per-account
+    quota for the requested service is used up; check usage at
+    https://data.bmlltech.com/#app/permissions. Other 429s are transient and
+    retried with exponential backoff.
+  sdk_exception: bmll.exceptions.QuotaReachedError
+- status: 502
+  title: Bad gateway
+  detail: Transient; retried with exponential backoff (max 30s).
+- status: 503
+  title: Service unavailable
+  detail: Transient; retried with exponential backoff (max 30s).
+- status: 504
+  title: Gateway timeout
+  detail: Transient; retried with exponential backoff (max 30s).
+sdk_exceptions:
+- {name: BMLLError, meaning: base class for all BMLL errors}
+- {name: ConnectivityError, meaning: unable to reach the BMLL services}
+- {name: AuthenticationError, meaning: the service was unable to authenticate}
+- {name: LoginError, meaning: error attempting to login (missing key/username)}
+- {name: MarketDataError, meaning: failed to retrieve market data}
+- {name: RequestTooLarge, meaning: request content length too large}
+- {name: QuotaReachedError, meaning: 429 quota exhausted ("Limit Exceeded")}
+- {name: InvalidArgumentError, meaning: client-side parameter validation}
+notes: |
+  No public error-reference docs exist (docs portal is login-gated) and no
+  OpenAPI could be harvested (401-gated), so this catalog is derived from the
+  error-handling contract encoded in the official public Python SDK. Not
+  RFC 9457 problem+json.
