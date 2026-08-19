@@ -38,7 +38,7 @@ tags:
 - Options
 created: '2026-07-21'
 modified: '2026-07-22'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: bmll-technologies:bmll-reference-data-api
   name: BMLL Reference Data API
