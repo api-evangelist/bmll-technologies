@@ -11,6 +11,17 @@ description: BMLL is a London-based provider of harmonised historical Level 3, 2
   publicly via the bmll Python SDK on PyPI, with delivery over API, S3, SFTP, and
   Snowflake. There is no self-serve signup - access is sales-led with key-pair
   credentials issued per account.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
