@@ -37,7 +37,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bmll-technologies.png
 tags:
-- Financial
+- Finance
 - Market Data
 - Order Book
 - Stocks
