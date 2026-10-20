@@ -15,3 +15,64 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: bmll-technologies-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/bmll/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: bmll
+      version: 1.25.6
+      released: '2026-10-15'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/bmll/
+      repo_leg: domain:bmlltech.com
+      publisher_leg: email:bmlltech.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: bmll-technologies-databricks-marketplace
+  label: Databricks Marketplace
+  partner: databricks
+  partner_name: Databricks Marketplace
+  category: data product listing
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  evidence: https://marketplace.databricks.com/provider/37d35e28-fa1f-40c6-b770-22ffb99dcaef
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: BMLL Technologies
+    matched_domain: bmlltech.com
+    matched_by: domain
+    listings: 11
+    sample_listings:
+    - BMLL Auction Imbalance Data
+    - BMLL Daily Classified Trades
+    - BMLL Daily Reference Master
+    - BMLL Data Feed Analytics
+    - BMLL Level 1 Quotes
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
