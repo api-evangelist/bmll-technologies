@@ -1,4 +1,4 @@
-# BMLL Technologies (bmll-technologies)
+# BMLL Technologies
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,115 +66,92 @@
 
 BMLL is a London-based provider of harmonised historical Level 3, 2, and 1 order book data and analytics for capital markets, covering global equities, ETFs, futures, and options. Acquired by Nordic Capital in October 2025 (with Optiver as minority shareholder), BMLL sells its data through the BMLL Data Lab hosted Python environment, the BMLL Data Feed file product, and entitlement-gated REST APIs (Reference Data, Time-Series, Market Data, and an async query APIv2) documented publicly via the bmll Python SDK on PyPI, with delivery over API, S3, SFTP, and Snowflake. There is no self-serve signup - access is sales-led with key-pair credentials issued per account.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/bmll-technologies/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/bmll-technologies/refs/heads/main/apis.yml)
+**Areas:** Finance · Market Data · Order Book · Stocks · Trading · Reference Data · Historical Data · Analytics · ETFs · Futures · Options
 
-## Tags
+## BMLL Technologies on APIs.io
 
-- Financial
-- Market Data
-- Order Book
-- Stocks
-- Trading
-- Reference Data
-- Historical Data
-- Analytics
-- ETF
-- Futures
-- Options
+Everything profiled for BMLL Technologies is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bmll-technologies/](https://apis.io/providers/bmll-technologies/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-07-21
-- **Modified:** 2026-07-21
+- [BMLL Reference Data API](https://apis.io/apis/bmll-technologies/bmll-reference-data-api/) — Query reference data for the instruments, listings, and markets in the BMLL universe (equities, ETFs, futures, options), including availability by data type…
+- [BMLL Time-Series API](https://apis.io/apis/bmll-technologies/bmll-time-series-api/) — Daily time-series metrics and analytics derived from BMLL's harmonised Level 3 order book history, including classified trades, queried by instrument,…
+- [BMLL Market Data API](https://apis.io/apis/bmll-technologies/bmll-market-data-api/) — Retrieve per-instrument market state and consolidated best bid and offer (CBBO) for listings on a given day, with an async poll-for-result request pattern.…
+- [BMLL APIv2 Query API](https://apis.io/apis/bmll-technologies/bmll-api-v2/) — Asynchronous dataset query API (initiate query, poll, download results as JSONL/Arrow into pandas or polars) over BMLL datasets, including a timeseries…
 
-## APIs
+### Published properties
 
-### BMLL Reference Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Query reference data for the instruments, listings, and markets in the BMLL universe (equities, ETFs, futures, options), including availability by data type (LOB, listing/instrument/market-level metrics, DataFeed) and ETF constituent data. Documented publicly through the bmll Python SDK (ReferenceDataClient); the host is live but requires entitled key-pair credentials (probed 403 without auth).
+#### Security (2)
 
-- **Human URL:** [https://pypi.org/project/bmll/](https://pypi.org/project/bmll/)
-- **Base URL:** `https://reference.data.bmlltech.com`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Bmll Technologies Authentication](https://apis.io/security/bmll-technologies/bmll-technologies-authentication/)
+- [Bmll Technologies Domain Security](https://apis.io/security/bmll-technologies/bmll-technologies-domain-security/)
 
-- Reference Data
-- Instruments
-- Markets
-- Listings
+## Where to find this API
 
-#### Properties
-
-- [Documentation](https://pypi.org/project/bmll/)
-- [Portal](https://data.bmlltech.com)
-
-### BMLL Time-Series API
-
-Daily time-series metrics and analytics derived from BMLL's harmonised Level 3 order book history, including classified trades, queried by instrument, listing, or market. Documented publicly through the bmll Python SDK (TimeSeriesClient); the host is live but requires entitled key-pair credentials (probed 403 without auth).
-
-- **Human URL:** [https://pypi.org/project/bmll/](https://pypi.org/project/bmll/)
-- **Base URL:** `https://time-series.data.bmlltech.com`
-
-#### Tags
-
-- Time Series
-- Analytics
-- Order Book
-- Metrics
-
-#### Properties
-
-- [Documentation](https://pypi.org/project/bmll/)
-- [Portal](https://data.bmlltech.com)
-
-### BMLL Market Data API
-
-Retrieve per-instrument market state and consolidated best bid and offer (CBBO) for listings on a given day, with an async poll-for-result request pattern. Documented publicly through the bmll Python SDK (MarketDataClient); the host is live but requires entitled key-pair credentials (probed 403 without auth).
-
-- **Human URL:** [https://pypi.org/project/bmll/](https://pypi.org/project/bmll/)
-- **Base URL:** `https://market-data.data.bmlltech.com`
-
-#### Tags
-
-- Market Data
-- Market State
-- CBBO
-- Quotes
-
-#### Properties
-
-- [Documentation](https://pypi.org/project/bmll/)
-- [Portal](https://data.bmlltech.com)
-
-### BMLL APIv2 Query API
-
-Asynchronous dataset query API (initiate query, poll, download results as JSONL/Arrow into pandas or polars) over BMLL datasets, including a timeseries query endpoint. An OpenAPI definition exists at https://api.data.bmlltech.com/openapi.json but it returned HTTP 401 Unauthorized when probed, so it could not be harvested. Documented publicly through the bmll Python SDK (ApiV2Client).
-
-- **Human URL:** [https://pypi.org/project/bmll/](https://pypi.org/project/bmll/)
-- **Base URL:** `https://api.data.bmlltech.com`
-
-#### Tags
-
-- Datasets
-- Query
-- Async
-- Historical Data
-
-#### Properties
-
-- [Documentation](https://pypi.org/project/bmll/)
-- [Portal](https://data.bmlltech.com)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://bmlltech.com/)
-- [Portal](https://data.bmlltech.com)
 - [Documentation](https://www.bmlltech.com/products/bmll-data-feed/documentation)
-- [GitHub Organization](https://github.com/bmlltech)
-- [LinkedIn](https://www.linkedin.com/company/bmll)
+- [Support](https://support.bmlltech.com/)
 - [Blog](https://www.bmlltech.com/knowledge-hub)
+- [Compliance](https://www.bmlltech.com/news/our-news/bmll-awarded-iso-27001-certification)
+- [Terms of service](https://www.bmlltech.com/support-pages/terms)
+- [Privacy policy](https://www.bmlltech.com/support-pages/privacy)
+- [GitHub](https://github.com/bmlltech)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 52.4 |
+| Access clarity | 28.9 |
+
+**Agent readiness 3.2** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.8** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bmll-technologies/](https://apis.io/providers/bmll-technologies/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BMLL Technologies: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bmll-technologies/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
